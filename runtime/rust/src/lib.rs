@@ -36,6 +36,7 @@ pub mod runtime;
 pub mod service;
 pub mod transports;
 pub mod worker;
+pub mod kv_router;
 
 pub mod distributed;
 
