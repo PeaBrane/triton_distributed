@@ -20,8 +20,7 @@ jobs:
           uv build --wheel
       - name: Upload wheels artifact
         uses: actions/upload-artifact@v4
-        working-directory: icp/python
         with:
           # Include the commit SHA in the artifact name
           name: wheels-${GITHUB_SHA}
-          path: dist/
+          path: icp/python/dist/
