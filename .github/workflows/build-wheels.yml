@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Setup uv
         uses: astral-sh/setup-uv@v5
       - name: Build wheels using uv
@@ -18,6 +20,7 @@ jobs:
           uv build --wheel
       - name: Upload wheels artifact
         uses: actions/upload-artifact@v4
+        working-directory: icp/python
         with:
           # Include the commit SHA in the artifact name
           name: wheels-${GITHUB_SHA}
