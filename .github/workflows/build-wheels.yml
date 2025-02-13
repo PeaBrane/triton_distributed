@@ -1,0 +1,24 @@
+
+name: Build Wheels
+
+on:
+  push:
+
+jobs:
+  build-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+      - name: Build wheels using uv
+        working-directory: icp/python
+        run: |
+          uv build --wheel
+      - name: Upload wheels artifact
+        uses: actions/upload-artifact@v4
+        with:
+          # Include the commit SHA in the artifact name
+          name: wheels-${GITHUB_SHA}
+          path: dist/
