@@ -24,6 +24,7 @@ jobs:
       - name: Build wheels using uv
         working-directory: runtime/rust/python-wheel
         run: |
+          sudo apt-get install -y protobuf-compiler
           uv build --wheel
       - name: Upload wheels artifact
         uses: actions/upload-artifact@v4
