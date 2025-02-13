@@ -22,11 +22,11 @@ jobs:
       - name: Setup uv
         uses: astral-sh/setup-uv@v5
       - name: Build wheels using uv
-        working-directory: runtime/rust/python-wheels
+        working-directory: runtime/rust/python-wheel
         run: |
           uv build --wheel
       - name: Upload wheels artifact
         uses: actions/upload-artifact@v4
         with:
           name: wheels-triton_distributed_rs-${{ matrix.python-version }}-${{ github.sha }}
-          path: runtime/rust/python-wheels/dist/
+          path: runtime/rust/python-wheel/dist/
