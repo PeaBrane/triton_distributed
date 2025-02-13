@@ -16,7 +16,7 @@
 
 [project]
 name = "triton-distributed-rs"
-version = "0.2.0"
+dynamic = ["version"]
 description = "Distributed LLM Framework"
 # readme = "README.md"
 authors = [
@@ -28,6 +28,10 @@ dependencies = [
     "uvloop>=0.21.0",
 ]
 
+[tool.setuptools_scm]
+version_file = "src/triton_distributed/runtime/_version.py"
+root = "../.."
+
 # [project.scripts]
 # triton-distributed = "triton_distributed_rs:main"
 
@@ -37,7 +41,7 @@ python-packages = ["triton_distributed_rs"]
 python-source = "python"
 
 [build-system]
-requires = ["maturin>=1.0,<2.0", "patchelf"]
+requires = ["maturin>=1.0,<2.0", "patchelf", "setuptools-scm>=8"]
 build-backend = "maturin"
 
 [tool.codespell]
