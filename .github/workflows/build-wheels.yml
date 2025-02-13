@@ -5,22 +5,28 @@ on:
   push:
 
 jobs:
-  build-python:
+  build-triton_distributed_rs:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}          
       - name: Setup uv
         uses: astral-sh/setup-uv@v5
       - name: Build wheels using uv
-        working-directory: icp/python
+        working-directory: runtime/rust/python-wheels
         run: |
           uv build --wheel
       - name: Upload wheels artifact
         uses: actions/upload-artifact@v4
         with:
-          # Include the commit SHA in the artifact name
-          name: wheels-${GITHUB_SHA}
-          path: icp/python/dist/
+          name: wheels-triton_distributed_rs-${{ matrix.python-version }}-${{ github.sha }}
+          path: runtime/rust/python-wheels/dist/
