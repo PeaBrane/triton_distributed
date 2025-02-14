@@ -47,7 +47,7 @@ async def worker(
         token_times = []
         last_token_time = start_time
 
-        stream = await client.random(
+        stream = await client.generate(
             Request(
                 prompt=prompt,
                 sampling_params={
